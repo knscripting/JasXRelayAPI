@@ -1,3 +1,4 @@
+```
 # JasX Relay API
 Make your JasX HUD Work with Anything
 
@@ -91,7 +92,7 @@ objects.
 TLDR; Commands are sent in json, respones are returned in json reflecting the change from the command. 
 
 Relay API Commands: (Note llDetectedKey(0) is used here assuming this is in a touch, could be a collision, etc)
-
+'''
 query:  Query returns helpful info from the jasx hud with no change to outfit
     jasxRelaySend(llDetectedKey(0),-111111,"query",""); 
 
@@ -113,3 +114,4 @@ What you cannot do
       
     Set Outfit, get outfit names, set sex, or change jasx Settings. These things are considered intrusive.
 
+```
