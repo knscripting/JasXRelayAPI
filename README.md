@@ -18,6 +18,7 @@ Requred:
 
 Guides and free stuff:
 JasX Setup Guide: https://drauslittlewebsite.com/jasx-account/
+
 Free Outfit Stripper and Relay: https://marketplace.secondlife.com/p/JasX-Clothing-Ripper-Stripper/20211415
 
 --- On to the API
