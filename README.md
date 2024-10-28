@@ -112,6 +112,5 @@ strapon: Sets the strapon to 1 or 0
 What you cannot do
       Set Outfit, get outfit names, set sex, or change jasx Settings. These things are considered intrusive.
       
-    Set Outfit, get outfit names, set sex, or change jasx Settings. These things are considered intrusive.
 
 ```
