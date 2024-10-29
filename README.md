@@ -6,6 +6,30 @@ A supplimental package for devleopers to extend the interactivity with the JasX 
 
 Thanks to Jas for the HUD and all those who helped with the design of this Relay API
 
+=====
+TLDR; Commands are sent in json, respones are returned in json reflecting the change from the command. 
+
+Relay API Commands: (Note llDetectedKey(0) is used here assuming this is in a touch, could be a collision, etc)
+
+query:  Query returns helpful info from the jasx hud with no change to outfit
+    jasxRelaySend(llDetectedKey(0),-111111,"query",""); 
+
+auto: Strips or dresses next logical clothing item Requires a parameter 1 or -1
+    jasxRelaySend(llDetectedKey(0),-111111,"auto","-1");
+    jasxRelaySend(llDetectedKey(0),-111111,"auto","1");
+
+setclothes: Works just like it does in the Jasx Hud  LEVEL/SLOT  ex Dressed/Arms
+    jasxRelaySend(llDetectedKey(0),-111111,"setclothes","dressed/arms");
+    jasxRelaySend(llDetectedKey(0),-111111,"setclothes","underwear"); 
+    
+strapon: Sets the strapon to 1 or 0
+    jasxRelaySend(llDetectedKey(0),-111111,"strapon","1");
+    jasxRelaySend(llDetectedKey(0),-111111,"strapon","0");
+
+Responses always look like:
+    {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"}
+====== 
+
 The JasX HUD outfit system for Secondlife is a lovely bit of scripting that makes your avatar outfit near infinately configurable, stripable, and interractive. What it can't do is allow for easy access to other scripted objects. This relay API intends to fix that and offer creators a simple pathway to dress, strip avatars using a compatible JasX outfit.
 
 Adding relay commands to your obejct can be as simple as a single line of code or for more advanced.
@@ -34,7 +58,7 @@ active and enabled
 
 This script should serve as a template and example of how you can choose to interact with it.
 
-The Relay works on channel -188455 responding to a standard listen
+The Relay works on channel -188455 responding to a listen channel you specify.
 
 ---Command Structure 
 -The command format is a json consisting of:
@@ -46,27 +70,18 @@ Example touch Query in an object:
     touch_end(integer num)
     {
         jasxRelaySend(llDetectedKey(0),-111111,"query","");     //Sends Query
-
         // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"}
         
         jasxRelaySend(llDetectedKey(0),-111111,"auto","-1");   //Sends strips next logical layer
-
         // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":681,"strapon":0,"sex":1,"species":"Dingo"}
 
-        jasxRelaySend(llDetectedKey(0),-111111,"setclothes","bits/crotch");
+        jasxRelaySend(llDetectedKey(0),-111111,"auto","1");   /Dresses to the next logical layer
+        // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"}
 
+        jasxRelaySend(llDetectedKey(0),-111111,"setclothes","bits/crotch");
         // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":554,"strapon":0,"sex":1,"species":"Dingo"}
 
     }
-
-    ** See details below
-
-    Query Returns to the sending object on channel -111111 the result of query
-    
-    {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"
-    translated: 
-    Kehf's UUID | Clothing State Full Dressed | Strapon False | Has Boy Parts | Is a Dingo
-    *** Every command will return the full state of the target. 
 
 Notes:
 Slots: Jasx Hud returns outfits in a bitwise integer.
@@ -80,37 +95,15 @@ Slots: Jasx Hud returns outfits in a bitwise integer.
 
 targetId: variable for the UUID of the Agent you send the request to
 
-JSON. JSON is hard, I know it, you know it, it isn't easy to work with but in talking with Jas
-he highly recommends it as things are going to change with the JasX hud beyond 0.6.0....
+auto -1 strips the next logical layer, the layers are HEAD,BOOTS,ARMS,TORSO,CROTCH in that order to whatever set is most dressed.
 
-To make your code and builds semi-future proof we are going ot use JSON stead of passing delimited lists.
+auto 1 dresses with the same logic in reverse, working from the CROTCH to head from the lowest dress level up.
 
-The below code will have examples you can copy paste to handle the object - agent communications
-The example will have parts of the Relay itself, and examples lines you can copy paste into
-objects. 
+Commands and responses are all sent in JSON for future proofing against the JasX hud's changes. The library contains #define macros to making working with JSON easier. 
 
-TLDR; Commands are sent in json, respones are returned in json reflecting the change from the command. 
+The below library and LSL scripts have examples on usage and implementation. If you have questions at any time please reach out directly in game.
 
-Relay API Commands: (Note llDetectedKey(0) is used here assuming this is in a touch, could be a collision, etc)
-'''
-query:  Query returns helpful info from the jasx hud with no change to outfit
-    jasxRelaySend(llDetectedKey(0),-111111,"query",""); 
-
-auto: Strips or dresses next logical clothing item Requires a parameter 1 or -1
-    jasxRelaySend(llDetectedKey(0),-111111,"auto","-1");
-    jasxRelaySend(llDetectedKey(0),-111111,"auto","1");
-
-setclothes: Works just like it does in the Jasx Hud  LEVEL/SLOT  ex Dressed/Arms
-    jasxRelaySend(llDetectedKey(0),-111111,"setclothes","dressed/arms");
-    jasxRelaySend(llDetectedKey(0),-111111,"setclothes","underwear"); 
-    
-strapon: Sets the strapon to 1 or 0
-    jasxRelaySend(llDetectedKey(0),-111111,"strapon","1");
-    jasxRelaySend(llDetectedKey(0),-111111,"strapon","0");
-
-----    
-What you cannot do
-      Set Outfit, get outfit names, set sex, or change jasx Settings. These things are considered intrusive.
-      
+What you cannot do: Set Outfit, get outfit names, set sex, or change jasx Settings.
+These things are considered intrusive.
 
 ```
