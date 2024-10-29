@@ -1,15 +1,15 @@
 
 # JasX Relay API
-Make your JasX HUD Work with Anything
+Bring smart, fast, and consistent clothing stripping/dressing to Secondlife Builds without the hassel of direct RLV scripting.
 
-A supplimental package for devleopers to extend the interactivity with the JasX HUD. https://github.com/JasXSL/JasX-HUD
+A complimentary library to the JasX HUD. https://github.com/JasXSL/JasX-HUD
 
 Thanks to Jas for the HUD and all those who helped with the design of this Relay API
 
 =====
 TLDR; Commands are sent in json, respones are returned in json reflecting the change from the command. 
 
-Relay API Commands: (Note llDetectedKey(0) is used here assuming this is in a touch, could be a collision, etc)
+Relay API Commands: (Note llDetectedKey(0) is used here assuming this is in a touch, could be a collision, sensor, etc)
 ```
 query:  Query returns helpful info from the jasx hud with no change to outfit
     jasxRelaySend(llDetectedKey(0),-111111,"query",""); 
