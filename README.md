@@ -85,11 +85,12 @@ Example touch Query in an object:
 
 Notes:
 Slots: Jasx Hud returns outfits in a bitwise integer.
-    682 is fully dressed
-    341 is Underwear
-    0 is naked
+    682 is fully dressed on all parts
+    341 is fully underwear on all parts
+    0 is fully naked on all parts
+        Any other combination is the bitwise combined states of all the parts.
     -1 Means no JasX Info, or Bad Command sent 
-    ** see code examples for quick functions to determine what is what
+    ** see _jasx_relay_lib.lsl for more details.
 
 -188455: Proposed API Relay listen channel
 
