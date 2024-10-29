@@ -1,4 +1,4 @@
-```
+
 # JasX Relay API
 Make your JasX HUD Work with Anything
 
@@ -10,7 +10,7 @@ Thanks to Jas for the HUD and all those who helped with the design of this Relay
 TLDR; Commands are sent in json, respones are returned in json reflecting the change from the command. 
 
 Relay API Commands: (Note llDetectedKey(0) is used here assuming this is in a touch, could be a collision, etc)
-
+```
 query:  Query returns helpful info from the jasx hud with no change to outfit
     jasxRelaySend(llDetectedKey(0),-111111,"query",""); 
 
@@ -27,7 +27,8 @@ strapon: Sets the strapon to 1 or 0
     jasxRelaySend(llDetectedKey(0),-111111,"strapon","0");
 
 Responses always look like:
-{"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"} 
+{"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"}
+```
 ====== 
 
 The JasX HUD outfit system for Secondlife is a lovely bit of scripting that makes your avatar outfit near infinately configurable, stripable, and interractive. What it can't do is allow for easy access to other scripted objects. This relay API intends to fix that and offer creators a simple pathway to dress, strip avatars using a compatible JasX outfit.
@@ -66,23 +67,22 @@ The Relay works on channel -188455 responding to a listen channel you specify.
 RESPOND-To-UUID --  RESPOND-To-Channel (any channel that is not 0 ) -- COMMAND -- COMMAND_Option
 
 Example touch Query in an object:
-
-    touch_end(integer num)
-    {
-        jasxRelaySend(llDetectedKey(0),-111111,"query","");     //Sends Query
-        // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"}
+```
+touch_end(integer num)
+{
+    jasxRelaySend(llDetectedKey(0),-111111,"query","");     //Sends Query
+    // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"}
         
-        jasxRelaySend(llDetectedKey(0),-111111,"auto","-1");   //Sends strips next logical layer
-        // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":681,"strapon":0,"sex":1,"species":"Dingo"}
+    jasxRelaySend(llDetectedKey(0),-111111,"auto","-1");   //Sends strips next logical layer
+    // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":681,"strapon":0,"sex":1,"species":"Dingo"}
 
-        jasxRelaySend(llDetectedKey(0),-111111,"auto","1");   /Dresses to the next logical layer
-        // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"}
+    jasxRelaySend(llDetectedKey(0),-111111,"auto","1");   /Dresses to the next logical layer
+    // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"}
 
-        jasxRelaySend(llDetectedKey(0),-111111,"setclothes","bits/crotch");
-        // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":554,"strapon":0,"sex":1,"species":"Dingo"}
-
-    }
-
+    jasxRelaySend(llDetectedKey(0),-111111,"setclothes","bits/crotch");
+    // returns:   {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":554,"strapon":0,"sex":1,"species":"Dingo"}
+}
+```
 Notes:
 Slots: Jasx Hud returns outfits in a bitwise integer.
     682 is fully dressed on all parts
@@ -107,4 +107,4 @@ The below library and LSL scripts have examples on usage and implementation. If 
 What you cannot do: Set Outfit, get outfit names, set sex, or change jasx Settings.
 These things are considered intrusive.
 
-```
+
