@@ -27,7 +27,7 @@ strapon: Sets the strapon to 1 or 0
     jasxRelaySend(llDetectedKey(0),-111111,"strapon","0");
 
 Responses always look like:
-    {"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"}
+{"target":"d1aa3f00-b010-427e-CCCC-9c96b925b3aa","slots":682,"strapon":0,"sex":1,"species":"Dingo"} 
 ====== 
 
 The JasX HUD outfit system for Secondlife is a lovely bit of scripting that makes your avatar outfit near infinately configurable, stripable, and interractive. What it can't do is allow for easy access to other scripted objects. This relay API intends to fix that and offer creators a simple pathway to dress, strip avatars using a compatible JasX outfit.
